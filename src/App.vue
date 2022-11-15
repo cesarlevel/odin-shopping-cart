@@ -1,25 +1,34 @@
 <script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+  import {provide, reactive} from 'vue';
+  import ShoppingCart from './components/ShoppingCart.vue';
+  import products from './static/products';
+
+  const state = reactive({
+    shoppingCard: [
+      {
+        id: 1,
+        image: 'https://picsum.photos/200',
+        name: 'Mona Lisa',
+        description: 'The real Mona Lisa',
+        price: 20,
+        quantity: 1,
+      }
+    ],
+    products,
+  });
+
+  provide('state', state);
 </script>
 
 <template>
-  <router-link to="/">Go to Home</router-link>
-  <router-link to="/about"> Go to About</router-link>
-  <!-- <HelloWorld msg="Vite + Vue" /> -->
+  <header>
+    <p>Logo</p>
+    <router-link to="/">Go to Home</router-link>
+    <router-link to="/products"> Go to Products</router-link>
+    <ShoppingCart />
+  </header>
   <router-view></router-view>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
 </style>
