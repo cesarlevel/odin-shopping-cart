@@ -1,7 +1,9 @@
 <script setup>
-import { inject, computed } from 'vue';
+import { inject, computed, ref } from 'vue';
 
 const state = inject('state');
+
+const showShoppingCart = ref(true);
 
 const itemsOnCart = computed(() => {
   return state.shoppingCard.length;
@@ -20,16 +22,18 @@ function updateQuantity({index, decrease = false} = {}) {
 </script>
 
 <template>
-  <h1>{{ itemsOnCart }}</h1>
-  <ul v-if="state.shoppingCard.length">
-    <li v-for="(item, index) in state.shoppingCard" :key="index">
-      {{ item }}
-      <button @click="updateQuantity({index, decrease: true})">-</button>
-      {{ item.quantity }}
-      <button @click="updateQuantity({index})">+</button>
-    </li>
-  </ul>
-  <p v-else>No items</p>
+  <button class="shoping-cart-button" @click="showShoppingCart = !showShoppingCart">Your Cart <span>{{ itemsOnCart }}</span></button>
+  <div v-show="showShoppingCart" class="shopping-cart">
+    <ul v-if="state.shoppingCard.length">
+      <li v-for="(item, index) in state.shoppingCard" :key="index">
+        {{ item }}
+        <button @click="updateQuantity({index, decrease: true})">-</button>
+        {{ item.quantity }}
+        <button @click="updateQuantity({index})">+</button>
+      </li>
+    </ul>
+    <p v-else>No items</p>
+  </div>
 </template>
 
 <style scoped>

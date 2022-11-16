@@ -1,11 +1,14 @@
 <template>
-    <h1>This is Products</h1>
-    <ul>
+    <h1>Our full catalog.</h1>
+    <ul class="product-list">
         <li v-for="(product, index) in state.products" :key="index">
-            {{product}}
+            <figure>
+                <img loading="lazy" :src="product.image"/>
+            </figure>
+            <h2>{{product.name}}</h2>
+            <p>{{product.description}}</p>
+            <h3>{{formatCurrency(product.price)}}</h3>
             <button @click="addToCart(product)">Add to cart</button>
-            <br />
-            <br />
         </li>
     </ul>
 </template>
@@ -28,9 +31,14 @@
                 }
             }
 
+            function formatCurrency(amount) {
+                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
+            }
+
             return {
                 state,
-                addToCart
+                addToCart,
+                formatCurrency,
             };
         }
     };
