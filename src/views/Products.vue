@@ -7,16 +7,17 @@
             </figure>
             <h2>{{product.name}}</h2>
             <p>{{product.description}}</p>
-            <h3>{{formatCurrency(product.price)}}</h3>
+            <h3>{{useFormatCurrency(product.price)}}</h3>
             <button @click="addToCart(product)">Add to cart</button>
         </li>
     </ul>
 </template>
 
 <script>
-    import { inject, computed } from 'vue';
+    import { inject,  } from 'vue';
     import ProductModel from '../models/product-model';
-    
+    import { useFormatCurrency } from '../composables/format';
+
     export default {
         setup() {
             const state = inject('state');
@@ -31,14 +32,10 @@
                 }
             }
 
-            function formatCurrency(amount) {
-                return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(amount)
-            }
-
             return {
                 state,
                 addToCart,
-                formatCurrency,
+                useFormatCurrency,
             };
         }
     };

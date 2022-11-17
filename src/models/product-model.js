@@ -1,3 +1,4 @@
+let t = 1;
 export default class Product {
     constructor({
         id,
@@ -8,7 +9,8 @@ export default class Product {
         quantity
     } = {}) {
         this.id = id;
-        this.image = image;
+        t++;
+        this.image = image.replace(/\d+/g, m => +m + t);
         this.name = name;
         this.description = description;
         this.price = price;

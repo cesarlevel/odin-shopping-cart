@@ -21,6 +21,9 @@
     <ShoppingCart />
   </header>
   <router-view></router-view>
+  <footer>
+    Copyright ©TinyStore
+  </footer>
 </template>
 
 <style scoped>
